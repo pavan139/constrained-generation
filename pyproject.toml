@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==78.1.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "constrained-generation"
+version = "0.1.0"
+description = "Finite-state constrained decoding with independent semantic execution checks"
+requires-python = ">=3.11"
+dependencies = []
+
+readme = "README.md"
+license = "MIT"
+
+[project.optional-dependencies]
+ml = ["torch>=2.2", "transformers>=4.45,<5"]
+
+[project.scripts]
+constrained-generation = "constrained_generation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

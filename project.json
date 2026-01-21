@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "05",
+  "repository_name": "constrained-generation",
+  "title": "Grammar-Constrained Generation",
+  "package": "constrained_generation",
+  "focus": "Incremental parsing, token masks, bounded interpreters",
+  "layout": {
+    "docs_root": "spec",
+    "tests_root": "tests",
+    "tools_root": "devtools",
+    "config_root": "presets",
+    "examples_root": "cases",
+    "verifier": "devtools/check_decoder.py",
+    "source_roots": [
+      "src"
+    ],
+    "documents": {
+      "architecture": "spec/language-and-states.md",
+      "design": "spec/automata-and-search.md",
+      "review": "spec/decoder-defects.md",
+      "experiments": "spec/beam-trials.md",
+      "publishing": "spec/sharing-the-decoder.md",
+      "validation": "spec/check-record.md"
+    }
+  }
+}
