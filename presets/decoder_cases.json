@@ -1,0 +1,1 @@
+{"count":20,"token_budget":128,"max_commands":8,"movement_budget":6,"modes":["unconstrained","grammar","semantic"],"label":"deterministic synthetic replay, not a trained model"}
