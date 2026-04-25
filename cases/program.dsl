@@ -1,0 +1,1 @@
+MOVE E 1;PICK a;STOP
