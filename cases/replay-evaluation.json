@@ -1,0 +1,1221 @@
+{
+  "experiment": "deterministic synthetic candidate replay; NOT trained-model accuracy",
+  "learned_model_evaluated": false,
+  "dataset": "20 synthetic DSL tasks including syntax, semantics, and budget failures",
+  "goal_oracle": "independently constructed final-state labels",
+  "token_budget": 128,
+  "approaches": {
+    "unconstrained_replay": {
+      "count": 20,
+      "metrics": {
+        "syntax_valid": 0.55,
+        "semantic_valid": 0.15,
+        "goal_success": 0.15,
+        "instruction_success": 0.15,
+        "budget_exhausted": 0.0
+      },
+      "cases": [
+        {
+          "text": "MOVE X 1;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-00",
+          "instruction": "Move 1 cells N.",
+          "expected": "MOVE N 1;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE E 1 PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-01",
+          "instruction": "Move 1 cells E, pick a.",
+          "expected": "MOVE E 1;PICK a;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE N 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-02",
+          "instruction": "Move 1 cells S, pick a, then drop a.",
+          "expected": "MOVE S 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        },
+        {
+          "text": "MOVE W 3;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-03",
+          "instruction": "Move 1 cells W.",
+          "expected": "MOVE W 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Robot moved outside 5x5 grid"
+        },
+        {
+          "text": "MOVE N 2;PICK a;STOP explanation",
+          "tokens": 33,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-04",
+          "instruction": "Move 2 cells N, pick a.",
+          "expected": "MOVE N 2;PICK a;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE E 2;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-05",
+          "instruction": "Move 2 cells E, pick a, then drop a.",
+          "expected": "MOVE E 2;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 4,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                4,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE X 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-06",
+          "instruction": "Move 2 cells S.",
+          "expected": "MOVE S 2;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE W 2 PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-07",
+          "instruction": "Move 2 cells W, pick a.",
+          "expected": "MOVE W 2;PICK a;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE S 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-08",
+          "instruction": "Move 1 cells N, pick a, then drop a.",
+          "expected": "MOVE N 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        },
+        {
+          "text": "MOVE E 3;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-09",
+          "instruction": "Move 1 cells E.",
+          "expected": "MOVE E 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Robot moved outside 5x5 grid"
+        },
+        {
+          "text": "MOVE S 1;PICK a;STOP explanation",
+          "tokens": 33,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-10",
+          "instruction": "Move 1 cells S, pick a.",
+          "expected": "MOVE S 1;PICK a;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE W 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-11",
+          "instruction": "Move 1 cells W, pick a, then drop a.",
+          "expected": "MOVE W 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 1,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                1,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE X 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-12",
+          "instruction": "Move 2 cells N.",
+          "expected": "MOVE N 2;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE E 2 PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-13",
+          "instruction": "Move 2 cells E, pick a.",
+          "expected": "MOVE E 2;PICK a;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE N 2;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-14",
+          "instruction": "Move 2 cells S, pick a, then drop a.",
+          "expected": "MOVE S 2;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        },
+        {
+          "text": "MOVE W 3;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-15",
+          "instruction": "Move 2 cells W.",
+          "expected": "MOVE W 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Robot moved outside 5x5 grid"
+        },
+        {
+          "text": "MOVE N 1;PICK a;STOP explanation",
+          "tokens": 33,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-16",
+          "instruction": "Move 1 cells N, pick a.",
+          "expected": "MOVE N 1;PICK a;STOP",
+          "syntax_valid": false,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Incomplete or invalid DSL program"
+        },
+        {
+          "text": "MOVE E 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-17",
+          "instruction": "Move 1 cells E, pick a, then drop a.",
+          "expected": "MOVE E 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 3,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                3,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;STOP",
+          "tokens": 77,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "movement-budget",
+          "instruction": "Remain at the starting position.",
+          "expected": "STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Total movement exceeds semantic budget"
+        },
+        {
+          "text": "PICK b;STOP",
+          "tokens": 12,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "missing-item",
+          "instruction": "Do nothing; no item exists.",
+          "expected": "STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        }
+      ]
+    },
+    "grammar_masked_replay": {
+      "count": 20,
+      "metrics": {
+        "syntax_valid": 1.0,
+        "semantic_valid": 0.6,
+        "goal_success": 0.6,
+        "instruction_success": 0.6,
+        "budget_exhausted": 0.0
+      },
+      "cases": [
+        {
+          "text": "MOVE N 1;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-00",
+          "instruction": "Move 1 cells N.",
+          "expected": "MOVE N 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 1,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 1;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-01",
+          "instruction": "Move 1 cells E, pick a.",
+          "expected": "MOVE E 1;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 3,
+            "y": 2,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE N 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-02",
+          "instruction": "Move 1 cells S, pick a, then drop a.",
+          "expected": "MOVE S 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        },
+        {
+          "text": "MOVE W 3;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-03",
+          "instruction": "Move 1 cells W.",
+          "expected": "MOVE W 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Robot moved outside 5x5 grid"
+        },
+        {
+          "text": "MOVE N 2;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-04",
+          "instruction": "Move 2 cells N, pick a.",
+          "expected": "MOVE N 2;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 0,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 2;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-05",
+          "instruction": "Move 2 cells E, pick a, then drop a.",
+          "expected": "MOVE E 2;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 4,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                4,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE S 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-06",
+          "instruction": "Move 2 cells S.",
+          "expected": "MOVE S 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 4,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE W 2;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-07",
+          "instruction": "Move 2 cells W, pick a.",
+          "expected": "MOVE W 2;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 0,
+            "y": 2,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE S 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-08",
+          "instruction": "Move 1 cells N, pick a, then drop a.",
+          "expected": "MOVE N 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        },
+        {
+          "text": "MOVE E 3;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-09",
+          "instruction": "Move 1 cells E.",
+          "expected": "MOVE E 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Robot moved outside 5x5 grid"
+        },
+        {
+          "text": "MOVE S 1;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-10",
+          "instruction": "Move 1 cells S, pick a.",
+          "expected": "MOVE S 1;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 3,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE W 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-11",
+          "instruction": "Move 1 cells W, pick a, then drop a.",
+          "expected": "MOVE W 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 1,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                1,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE N 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-12",
+          "instruction": "Move 2 cells N.",
+          "expected": "MOVE N 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 0,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 2;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-13",
+          "instruction": "Move 2 cells E, pick a.",
+          "expected": "MOVE E 2;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 4,
+            "y": 2,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE N 2;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-14",
+          "instruction": "Move 2 cells S, pick a, then drop a.",
+          "expected": "MOVE S 2;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        },
+        {
+          "text": "MOVE W 3;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-15",
+          "instruction": "Move 2 cells W.",
+          "expected": "MOVE W 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Robot moved outside 5x5 grid"
+        },
+        {
+          "text": "MOVE N 1;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-16",
+          "instruction": "Move 1 cells N, pick a.",
+          "expected": "MOVE N 1;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 1,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-17",
+          "instruction": "Move 1 cells E, pick a, then drop a.",
+          "expected": "MOVE E 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 3,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                3,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;STOP",
+          "tokens": 77,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "movement-budget",
+          "instruction": "Remain at the starting position.",
+          "expected": "STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Total movement exceeds semantic budget"
+        },
+        {
+          "text": "PICK b;STOP",
+          "tokens": 12,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "missing-item",
+          "instruction": "Do nothing; no item exists.",
+          "expected": "STOP",
+          "syntax_valid": true,
+          "semantic_valid": false,
+          "goal_success": false,
+          "instruction_success": false,
+          "error": "Requested item is not at robot position"
+        }
+      ]
+    },
+    "semantic_masked_replay": {
+      "count": 20,
+      "metrics": {
+        "syntax_valid": 1.0,
+        "semantic_valid": 1.0,
+        "goal_success": 0.85,
+        "instruction_success": 0.8,
+        "budget_exhausted": 0.0
+      },
+      "cases": [
+        {
+          "text": "MOVE N 1;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-00",
+          "instruction": "Move 1 cells N.",
+          "expected": "MOVE N 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 1,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 1;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-01",
+          "instruction": "Move 1 cells E, pick a.",
+          "expected": "MOVE E 1;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 3,
+            "y": 2,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE N 1;MOVE E 1;MOVE E 1;MOVE N 1;MOVE S 1;MOVE N 1;STOP",
+          "tokens": 59,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 40,
+          "id": "synthetic-02",
+          "instruction": "Move 1 cells S, pick a, then drop a.",
+          "expected": "MOVE S 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": false,
+          "instruction_success": false,
+          "final_state": {
+            "x": 4,
+            "y": 0,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                2,
+                3
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE W 1;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-03",
+          "instruction": "Move 1 cells W.",
+          "expected": "MOVE W 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 1,
+            "y": 2,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE N 2;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-04",
+          "instruction": "Move 2 cells N, pick a.",
+          "expected": "MOVE N 2;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 0,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 2;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-05",
+          "instruction": "Move 2 cells E, pick a, then drop a.",
+          "expected": "MOVE E 2;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 4,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                4,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE S 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-06",
+          "instruction": "Move 2 cells S.",
+          "expected": "MOVE S 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 4,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE W 2;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-07",
+          "instruction": "Move 2 cells W, pick a.",
+          "expected": "MOVE W 2;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 0,
+            "y": 2,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE S 1;MOVE E 1;MOVE E 1;MOVE N 1;MOVE N 1;MOVE N 1;STOP",
+          "tokens": 59,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 40,
+          "id": "synthetic-08",
+          "instruction": "Move 1 cells N, pick a, then drop a.",
+          "expected": "MOVE N 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": false,
+          "instruction_success": false,
+          "final_state": {
+            "x": 4,
+            "y": 0,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                2,
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE E 1;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-09",
+          "instruction": "Move 1 cells E.",
+          "expected": "MOVE E 1;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 3,
+            "y": 2,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE S 1;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-10",
+          "instruction": "Move 1 cells S, pick a.",
+          "expected": "MOVE S 1;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 3,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE W 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-11",
+          "instruction": "Move 1 cells W, pick a, then drop a.",
+          "expected": "MOVE W 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 1,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                1,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE N 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-12",
+          "instruction": "Move 2 cells N.",
+          "expected": "MOVE N 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 0,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 2;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-13",
+          "instruction": "Move 2 cells E, pick a.",
+          "expected": "MOVE E 2;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 4,
+            "y": 2,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE N 2;MOVE E 1;MOVE E 1;MOVE S 1;MOVE N 1;STOP",
+          "tokens": 50,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 33,
+          "id": "synthetic-14",
+          "instruction": "Move 2 cells S, pick a, then drop a.",
+          "expected": "MOVE S 2;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": false,
+          "instruction_success": false,
+          "final_state": {
+            "x": 4,
+            "y": 0,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                2,
+                4
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE W 2;STOP",
+          "tokens": 14,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-15",
+          "instruction": "Move 2 cells W.",
+          "expected": "MOVE W 2;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 0,
+            "y": 2,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE N 1;PICK a;STOP",
+          "tokens": 21,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "synthetic-16",
+          "instruction": "Move 1 cells N, pick a.",
+          "expected": "MOVE N 1;PICK a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 1,
+            "inventory": [
+              "a"
+            ],
+            "items": []
+          }
+        },
+        {
+          "text": "MOVE E 1;PICK a;DROP a;STOP",
+          "tokens": 28,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 0,
+          "id": "synthetic-17",
+          "instruction": "Move 1 cells E, pick a, then drop a.",
+          "expected": "MOVE E 1;PICK a;DROP a;STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 3,
+            "y": 2,
+            "inventory": [],
+            "items": [
+              [
+                "a",
+                3,
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "text": "MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;MOVE E 1;MOVE W 1;STOP",
+          "tokens": 59,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 5,
+          "id": "movement-budget",
+          "instruction": "Remain at the starting position.",
+          "expected": "STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": false,
+          "final_state": {
+            "x": 2,
+            "y": 2,
+            "inventory": [],
+            "items": []
+          }
+        },
+        {
+          "text": "STOP",
+          "tokens": 5,
+          "eos": true,
+          "budget_exhausted": false,
+          "mask_interventions": 1,
+          "id": "missing-item",
+          "instruction": "Do nothing; no item exists.",
+          "expected": "STOP",
+          "syntax_valid": true,
+          "semantic_valid": true,
+          "goal_success": true,
+          "instruction_success": true,
+          "final_state": {
+            "x": 2,
+            "y": 2,
+            "inventory": [],
+            "items": []
+          }
+        }
+      ]
+    }
+  },
+  "unrun_workflows": [
+    "local HF unconstrained generation",
+    "local HF grammar-masked generation",
+    "local HF semantic-masked generation"
+  ]
+}
