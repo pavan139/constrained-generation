@@ -1,0 +1,19 @@
+{
+  "scope": "Integration smoke only: randomly initialized tiny GPT-2; this is not task-accuracy evidence",
+  "inherited_configuration": {
+    "forced_eos_token_id": 0,
+    "min_new_tokens": 8
+  },
+  "old_generation_suffix": [
+    0
+  ],
+  "after_grammar_text": "STOP",
+  "after_syntax_valid": true,
+  "after_budget_exhausted": true,
+  "modes_tested": [
+    "unconstrained_hf",
+    "grammar_masked_hf",
+    "semantic_masked_hf"
+  ],
+  "torch": "2.6.0+cpu"
+}
